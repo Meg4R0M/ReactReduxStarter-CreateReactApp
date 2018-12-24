@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import registerServiceWorker from './registerServiceWorker';
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
+import reducers from "./reducers";
 import thunk from "redux-thunk";
 import App from "./components/app";
-import reducers from "./reducers";
 import { BrowserRouter } from "react-router-dom";
-import { actionCounter } from './middlewares/action-counter'
+import { actionLogger } from './middlewares/action-logger'
 
 const invariant = require("redux-immutable-state-invariant").default();
 const createStoreWithMiddleware = applyMiddleware(
     thunk,
-    actionCounter,
+    actionLogger,
     invariant
 )(createStore);
 
@@ -30,4 +29,3 @@ ReactDOM.render(
     </Provider>,
     document.querySelector("#root")
 );
-registerServiceWorker();

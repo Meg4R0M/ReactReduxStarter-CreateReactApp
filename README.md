@@ -1,11 +1,7 @@
-# Ce qui a été fait dans cette branche
+# Starter React V16 + Redux
 
-+ npm install lodash
-+ npm install reselect
-+ npm install redux-immutable-state-invariant
-
-+ Ajout du container ressources
-+ Ajout de selecteurs + root reducer
-+ Ajout d'une action et action-type
-+ Remplacement dans les routes de TodoApp par Ressources
-+ Configuration de redux-immutable-state-invariant dans index.js
++ Création du dossier server
++ npm install -g nodemon
++ npm install --save morgan body-parser mongoose express
++ Ajout d'une commande de lancement du serveur dans package.json
++ React-Redux-Avance-JWT-Authentification

@@ -1,7 +1,7 @@
 import {incrementActionCount} from "../actions";
 import {INCREMENT_ACTION_COUNT} from "../actions/action-types";
 
-export const actionCounter = (store) => (next) => (action) => {
+export const actionLogger = (store) => (next) => (action) => {
   if (action.type !== INCREMENT_ACTION_COUNT){
     store.dispatch(incrementActionCount());
   }

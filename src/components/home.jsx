@@ -1,13 +1,9 @@
-import React, {Component} from 'react';
+import { Component } from "react";
 
-class Home extends Component {
+export default class Home extends Component {
   render() {
     return (
-        <div>
-          Bienvenue
-        </div>
+        "Bienvenue sur React Redux avancé"
     );
   }
 }
-
-export default Home;
