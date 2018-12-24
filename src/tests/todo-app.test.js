@@ -4,6 +4,15 @@ import TodoApp from '../components/todo-app'
 import { shallow } from 'enzyme'
 
 describe('Test TodoApp fonctionnement', function () {
+
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<TodoApp />)
+  });
+  afterEach(() => {
+    wrapper.unmount();
+  });
+
   it('Render le composant TodoApp sans erreur', () => {
     const div = document.createElement('div');
     ReactDOM.render(<TodoApp/>, div)
@@ -16,12 +25,29 @@ describe('Test TodoApp fonctionnement', function () {
   });
 
   it('Render le composant TodoApp sans erreur (shallow)', () => {
-    const wrapper = shallow(<TodoApp />);
     expect(wrapper.html()).toContain("Nouvelle tâche")
   });
 
   it('Possède 2 classes CSS "row" (shallow)', () => {
-    const wrapper = shallow(<TodoApp />);
     expect(wrapper.find('.row').length).toEqual(2);
+  });
+
+  it('Possède 1 id "addButton" (shallow)', () => {
+    expect(wrapper.find('#addButton').length).toEqual(1);
+  });
+
+  it('Change la valeur de l\'input (shallow)', () => {
+    wrapper.find('input').simulate("change", {
+      target: { value : "Yo"}
+    });
+    expect(wrapper.find("input").prop("value")).toEqual("Yo");
+  });
+
+  it('Saisie une valeur dans l\'input, clique sur le bouton et verifie que le texte est dans la liste (shallow)', () => {
+    wrapper.find('input').simulate("change", {
+      target: { value : "Yo"}
+    });
+    wrapper.find('button').simulate("click");
+    expect(wrapper.find(".list-group-item").text()).toContain("Yo");
   });
 });
