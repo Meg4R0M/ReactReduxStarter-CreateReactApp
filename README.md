@@ -1,4 +1,4 @@
 ### Dans cette branche : ###
-+ création d'un model mongoose pour un utilisateur
-+ Inscription et connexion a mongo lab
-+ Connexion a mongodb dans l'index
++ Création d'un token avec jwr et renvoi de celui ci lors de l'inscription ( controller )
++ Installation de jwt-simple
++ Ajout d'un fichier config.js avec une clé
