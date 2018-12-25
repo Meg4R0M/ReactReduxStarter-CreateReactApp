@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 
-
 export default class TodoApp extends Component {
-  state = { todoList: [], input: "" }
+  state = { todoList: [], input: "" };
 
   onButtonPress = (e) => {
     const input = this.state.input;
     this.setState({ todoList: [...this.state.todoList, input], input: "" });
-  }
-
-
+  };
 
   renderTodoList = () => {
     return this.state.todoList.map((todo, index) => {
@@ -17,8 +14,8 @@ export default class TodoApp extends Component {
         {todo}
       </div>)
     })
+  };
 
-  }
   render() {
 
     return (
