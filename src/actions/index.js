@@ -1,14 +1,15 @@
 import {
   SET_AUTHENTIFICATION, INCREMENT_ACTION_COUNT, ADD_RESOURCE
 } from "./action-types";
+import axios from 'axios'
+
+const BASE_URL = "http://localhost:3090";
 
 export function setAuthentification(isLoggedIn){
-  return function (dispatch){
-    dispatch({
-      type: SET_AUTHENTIFICATION,
-      payload: isLoggedIn
-    });
-  }
+  return {
+    type: SET_AUTHENTIFICATION,
+    payload: isLoggedIn
+    };
 }
 
 export function incrementActionCount(){
@@ -20,5 +21,21 @@ export function incrementActionCount(){
 export function addResource(){
   return {
     type: ADD_RESOURCE
+  }
+}
+
+export function signinUser({email, password}, history){
+  return function(dispatch){
+    axios.post(`${BASE_URL}/signin`,
+        {
+          email,
+          password
+        }).then( (response) => {
+          localStorage.setItem("token", response.data.token);
+          dispatch(setAuthentification(true));
+          history.push("/resources");
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 }

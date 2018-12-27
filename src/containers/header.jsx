@@ -5,10 +5,6 @@ import { Link } from "react-router-dom";
 
 class Header extends Component {
 
-  onClickAuthentification = () => {
-    this.props.setAuthentification(!this.props.isLoggedIn)
-  };
-
   renderAuthentificationLabel = () => {
     if (this.props.isLoggedIn){
       return "Déconnexion";
@@ -22,13 +18,15 @@ class Header extends Component {
         <div>
           <ul className="nav nav-tabs bg-primary">
             <li className="nav-item">
-              <Link to="/" className="nav-link">Accueil</Link>
+              <Link to={"/"} className="nav-link">Accueil</Link>
             </li>
             <li className="nav-item">
-              <Link to="/ressources" className="nav-link">Ressources</Link>
+              <Link to={"/ressources"} className="nav-link">Ressources</Link>
             </li>
             <li className="nav-item">
-              <button className="nav-link" onClick={this.onClickAuthentification}>{this.renderAuthentificationLabel()}</button>
+              <Link className="nav-link" to={"/signin"}>
+                {this.renderAuthentificationLabel()}
+              </Link>
             </li>
           </ul>
         </div>

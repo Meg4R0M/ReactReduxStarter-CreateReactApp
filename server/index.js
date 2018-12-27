@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const expressServer = express();
 const router = require("./route");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 mongoose.connect("mongodb://Meg4R0M:password123@ds145923.mlab.com:45923/dbmeg4r0m",
     { useNewUrlParser: true }
@@ -16,6 +17,7 @@ mongoose.connection
 // App Setup
 expressServer.use(morgan('combined'));
 expressServer.use(bodyParser.json({ type: '*/*' }));
+expressServer.use(cors());
 router(expressServer);
 // Server Setup
 const port = process.env.PORT || 3090;
