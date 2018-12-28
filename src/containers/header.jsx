@@ -13,6 +13,33 @@ class Header extends Component {
     }
   };
 
+  renderAuthentificationLink = () => {
+    if (this.props.isLoggedIn){
+      return (
+          <li className="nav-item">
+            <Link className="nav-link" to={"/signout"}>
+              {this.renderAuthentificationLabel()}
+            </Link>
+          </li>
+      )
+    }else{
+      return (
+          [
+            <li key={1} className="nav-item">
+              <Link className="nav-link" to={"/signin"}>
+                {this.renderAuthentificationLabel()}
+              </Link>
+            </li>,
+            <li key={2} className="nav-item">
+              <Link className="nav-link" to={"/signup"}>
+                Inscription
+              </Link>
+            </li>
+          ]
+      )
+    }
+  };
+
   render() {
     return (
         <div>
@@ -23,11 +50,7 @@ class Header extends Component {
             <li className="nav-item">
               <Link to={"/ressources"} className="nav-link">Ressources</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={"/signin"}>
-                {this.renderAuthentificationLabel()}
-              </Link>
-            </li>
+            {this.renderAuthentificationLink()}
           </ul>
         </div>
     );

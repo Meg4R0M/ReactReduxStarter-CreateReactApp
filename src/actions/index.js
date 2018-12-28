@@ -39,3 +39,10 @@ export function signinUser({email, password}, history){
     });
   }
 }
+
+export function signoutUser(){
+  return function(dispatch){
+    dispatch(setAuthentification(false));
+    localStorage.removeItem("token");
+  }
+}
