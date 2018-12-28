@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addResource } from '../actions'
+import { addResource, getSpecialResource } from '../actions'
 import { connect } from "react-redux";
 import {
   getResourceList,
@@ -9,6 +9,10 @@ import {
 } from "../selectors/resources"
 
 class Resources extends Component {
+
+  componentWillMount() {
+    this.props.getSpecialResource();
+  }
 
   renderResources = (resourceList) => {
     return resourceList.map((r, index) => <li key={index}>{r}</li>)
@@ -40,6 +44,7 @@ class Resources extends Component {
               <ul>{this.renderResources(this.props.specialNumber)}</ul>
             </div>
           </div>
+          {this.props.message}
         </div>
     );
   }
@@ -49,11 +54,13 @@ const mapStateToProps = state => ({
   resourceList: getResourceList(state),
   containsOneResourceList: getContainsOneResourceList(state),
   primeResourceList: getPrimeNumberResourceList(state),
-  specialNumber: specialNumber(state)
+  specialNumber: specialNumber(state),
+  message: state.message
 });
 
 const mapDispatchToProps = {
-  addResource
+  addResource,
+  getSpecialResource
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(Resources);

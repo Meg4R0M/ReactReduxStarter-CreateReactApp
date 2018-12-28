@@ -11,7 +11,7 @@ module.exports = function (expressServer) {
   });
   expressServer.post("/signup", authentificationController.signup);
   expressServer.post("/signin", requireValidCredentials, authentificationController.signin);
-  expressServer.get("/ressourceSecrete", requireToken, function (req,res){
-    res.send({codeDeLaMort: 42})
+  expressServer.get("/specialResource", requireToken, function (req,res){
+    res.send({ result: "Ceci est du contenu sécurisé" })
   });
-}
+};

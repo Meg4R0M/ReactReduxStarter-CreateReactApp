@@ -1,5 +1,5 @@
 import {
-  SET_AUTHENTIFICATION, INCREMENT_ACTION_COUNT, ADD_RESOURCE
+  SET_AUTHENTIFICATION, INCREMENT_ACTION_COUNT, ADD_RESOURCE, PARSE_MESSAGE
 } from "./action-types";
 import axios from 'axios'
 
@@ -21,6 +21,19 @@ export function incrementActionCount(){
 export function addResource(){
   return {
     type: ADD_RESOURCE
+  }
+}
+
+export function getSpecialResource(){
+  return function(dispatch){
+    axios.get(`${BASE_URL}/signup`, {
+      headers: { authorization: localStorage.getItem("token") }
+    })
+        .then( (response) => {
+          dispatch({type : PARSE_MESSAGE, payload: response.data.result})
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 }
 
