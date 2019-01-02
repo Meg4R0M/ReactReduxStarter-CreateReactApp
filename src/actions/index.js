@@ -1,5 +1,5 @@
 import {
-  SET_AUTHENTIFICATION, INCREMENT_ACTION_COUNT, ADD_RESOURCE, PARSE_MESSAGE
+  SET_AUTHENTIFICATION, INCREMENT_ACTION_COUNT, ADD_RESOURCE, PARSE_MESSAGE, PARSE_ERROR, RESET_ERROR
 } from "./action-types";
 import axios from 'axios'
 
@@ -32,14 +32,15 @@ export function getSpecialResource(){
         .then( (response) => {
           dispatch({type : PARSE_MESSAGE, payload: response.data.result})
     }).catch((error) => {
-      console.log(error);
+      dispatch(parseError("Identifiant et/ou mot de passe invalide"))
     });
   }
 }
 
 export function signinUser({email, password}, history){
+  console.log(email, password);
   return function(dispatch){
-    axios.post(`${BASE_URL}/signin`,
+    axios.post(`${BASE_URL}/signin/`,
         {
           email,
           password
@@ -74,4 +75,12 @@ export function signupUser({email, password}, history){
       console.log(error);
     });
   }
+}
+
+export function parseError(errorMessage){
+  return {type: PARSE_ERROR, payload: errorMessage}
+}
+
+export function resetError(){
+  return {type: RESET_ERROR}
 }

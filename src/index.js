@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import App from "./components/app.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { actionLogger } from './middlewares/action-logger'
+import { setAuthentification } from './actions'
 
 const invariant = require("redux-immutable-state-invariant").default();
 const createStoreWithMiddleware = applyMiddleware(
@@ -15,13 +16,20 @@ const createStoreWithMiddleware = applyMiddleware(
     invariant
 )(createStore);
 
+const store = createStoreWithMiddleware(
+    reducers,
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+const token = localStorage.getItem("token");
+if (token){
+    store.dispatch(setAuthentification(true))
+}
+
 ReactDOM.render(
     <Provider
-        store={createStoreWithMiddleware(
-            reducers,
-            window.__REDUX_DEVTOOLS_EXTENSION__ &&
-            window.__REDUX_DEVTOOLS_EXTENSION__()
-        )}
+        store={store}
     >
       <BrowserRouter>
         <App />
